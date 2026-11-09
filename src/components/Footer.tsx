@@ -42,11 +42,32 @@ const contactLinks = [
 export const Footer: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.1 })
   const [copied, setCopied] = useState(false)
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    service: 'Backend API Design',
+    message: '',
+  })
+  const [sentSuccess, setSentSuccess] = useState(false)
 
   const copyEmail = () => {
     navigator.clipboard.writeText('chanon.sungchoom@gmail.com')
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!formState.email || !formState.message) return
+
+    // Compose mailto link
+    const subject = encodeURIComponent(`[Inquiry] ${formState.service} from ${formState.name || 'Client'}`)
+    const body = encodeURIComponent(
+      `Name: ${formState.name}\nEmail: ${formState.email}\nService Interested: ${formState.service}\n\nMessage:\n${formState.message}`
+    )
+    window.open(`mailto:chanon.sungchoom@gmail.com?subject=${subject}&body=${body}`, '_blank')
+    setSentSuccess(true)
+    setTimeout(() => setSentSuccess(false), 4000)
   }
 
   return (
@@ -64,7 +85,7 @@ export const Footer: React.FC = () => {
       />
 
       <div className="relative max-w-6xl mx-auto px-6 pt-20 pb-12">
-        {/* Contact Section */}
+        {/* Contact Section Header */}
         <div
           ref={ref as React.RefObject<HTMLDivElement>}
           className={`text-center mb-16 ${inView ? 'animate-in' : 'opacity-0'}`}
@@ -72,81 +93,186 @@ export const Footer: React.FC = () => {
           <span className="font-mono text-xs tracking-widest uppercase mb-3 block" style={{ color: '#7C3AED' }}>
             — Get in Touch —
           </span>
-          <h2 className="section-heading mb-4">Let's Build Something</h2>
+          <h2 className="section-heading mb-4">Let's Build Something High-Performance</h2>
           <p className="text-sm max-w-md mx-auto" style={{ color: '#94A3B8' }}>
             Available for backend engineering roles, system architecture consulting, and AI-driven development projects.
           </p>
         </div>
 
-        {/* Contact cards */}
-        <div className={`grid grid-cols-1 md:grid-cols-3 gap-5 mb-16 ${inView ? 'animate-in delay-200' : 'opacity-0'}`}>
-          {contactLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.href.startsWith('http') ? '_blank' : undefined}
-              rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="glass-card rounded-2xl p-6 flex items-center gap-4 group transition-all duration-300 hover:scale-[1.02]"
-            >
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110"
-                style={{
-                  background: `${link.color}15`,
-                  border: `1px solid ${link.color}35`,
-                  color: link.color,
-                  boxShadow: `0 0 15px ${link.color}20`,
-                }}
-              >
-                {link.icon}
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs font-mono mb-0.5" style={{ color: '#94A3B8' }}>{link.label}</p>
-                <p className="text-sm font-semibold text-white truncate group-hover:text-violet-200 transition-colors">
-                  {link.value}
-                </p>
-              </div>
-            </a>
-          ))}
-        </div>
-
-        {/* Copy email button */}
-        <div className={`flex justify-center mb-14 ${inView ? 'animate-in delay-400' : 'opacity-0'}`}>
-          <button
-            onClick={copyEmail}
-            className="flex items-center gap-2 font-mono text-sm px-5 py-2.5 rounded-lg transition-all duration-300"
+        {/* Contact Form & Cards Grid */}
+        <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 ${inView ? 'animate-in delay-200' : 'opacity-0'}`}>
+          {/* Quick Inquiry Form (7 cols) */}
+          <div
+            className="lg:col-span-7 glass-card rounded-2xl p-6 md:p-8"
             style={{
-              border: '1px solid rgba(124,58,237,0.3)',
-              color: '#A78BFA',
-              background: 'rgba(124,58,237,0.06)',
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget
-              el.style.background = 'rgba(124,58,237,0.15)'
-              el.style.borderColor = 'rgba(124,58,237,0.6)'
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget
-              el.style.background = 'rgba(124,58,237,0.06)'
-              el.style.borderColor = 'rgba(124,58,237,0.3)'
+              border: '1px solid rgba(124,58,237,0.25)',
+              background: 'rgba(255, 255, 255, 0.02)',
             }}
           >
-            {copied ? (
-              <>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                Copied!
-              </>
-            ) : (
-              <>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-                chanon.sungchoom@gmail.com
-              </>
-            )}
-          </button>
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-2.5 h-2.5 rounded-full animate-pulse-glow" style={{ background: '#7C3AED' }} />
+              <h3 className="font-bold text-white text-base">Direct Architecture Inquiry</h3>
+            </div>
+
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-mono text-slate-400 mb-1.5">Your Name</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Satoshi Nakamoto"
+                    value={formState.name}
+                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl text-sm text-white placeholder-slate-500 transition-all duration-200 focus:outline-none"
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.4)',
+                      border: '1px solid rgba(124, 58, 237, 0.3)',
+                    }}
+                    onFocus={(e) => (e.target.style.borderColor = '#7C3AED')}
+                    onBlur={(e) => (e.target.style.borderColor = 'rgba(124, 58, 237, 0.3)')}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono text-slate-400 mb-1.5">Your Email</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="name@company.com"
+                    value={formState.email}
+                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl text-sm text-white placeholder-slate-500 transition-all duration-200 focus:outline-none"
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.4)',
+                      border: '1px solid rgba(124, 58, 237, 0.3)',
+                    }}
+                    onFocus={(e) => (e.target.style.borderColor = '#7C3AED')}
+                    onBlur={(e) => (e.target.style.borderColor = 'rgba(124, 58, 237, 0.3)')}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-mono text-slate-400 mb-1.5">Project Scope / Service</label>
+                <select
+                  value={formState.service}
+                  onChange={(e) => setFormState({ ...formState, service: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl text-sm text-white transition-all duration-200 focus:outline-none"
+                  style={{
+                    background: '#090D16',
+                    border: '1px solid rgba(124, 58, 237, 0.3)',
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = '#7C3AED')}
+                  onBlur={(e) => (e.target.style.borderColor = 'rgba(124, 58, 237, 0.3)')}
+                >
+                  <option value="Backend API Design (Go / Fiber)">Backend API Design (Go / Fiber)</option>
+                  <option value="Clean Architecture & Multi-DB">Clean Architecture & Multi-DB (Oracle/Postgres/MySQL)</option>
+                  <option value="AI-Assisted Engineering Workflow">AI-Assisted Engineering Workflow Consultation</option>
+                  <option value="Full-Time Engineering Role">Full-Time Engineering Role Offer</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-mono text-slate-400 mb-1.5">Project Details / Message</label>
+                <textarea
+                  required
+                  rows={4}
+                  placeholder="Tell me about the system requirements, scale, or business objectives..."
+                  value={formState.message}
+                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-xl text-sm text-white placeholder-slate-500 transition-all duration-200 focus:outline-none resize-none"
+                  style={{
+                    background: 'rgba(0, 0, 0, 0.4)',
+                    border: '1px solid rgba(124, 58, 237, 0.3)',
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = '#7C3AED')}
+                  onBlur={(e) => (e.target.style.borderColor = 'rgba(124, 58, 237, 0.3)')}
+                />
+              </div>
+
+              <div className="flex items-center justify-between pt-2">
+                <span className="text-[11px] font-mono text-slate-500">
+                  ⚡ Dispatches directly via Mail client
+                </span>
+                <button
+                  type="submit"
+                  className="btn-violet text-white text-xs px-6 py-2.5"
+                >
+                  {sentSuccess ? '✓ Dispatched Mail Client!' : 'Send Inquiry →'}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Quick Contact Cards (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-between gap-4">
+            <div className="space-y-4">
+              {contactLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="glass-card rounded-2xl p-5 flex items-center gap-4 group transition-all duration-300 hover:scale-[1.02]"
+                >
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110"
+                    style={{
+                      background: `${link.color}15`,
+                      border: `1px solid ${link.color}35`,
+                      color: link.color,
+                      boxShadow: `0 0 15px ${link.color}20`,
+                    }}
+                  >
+                    {link.icon}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-mono mb-0.5" style={{ color: '#94A3B8' }}>{link.label}</p>
+                    <p className="text-sm font-semibold text-white truncate group-hover:text-violet-200 transition-colors">
+                      {link.value}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            {/* Quick copy email card */}
+            <div
+              className="p-5 rounded-2xl flex flex-col items-center justify-center text-center"
+              style={{
+                background: 'rgba(124, 58, 237, 0.05)',
+                border: '1px dashed rgba(124, 58, 237, 0.3)',
+              }}
+            >
+              <p className="text-xs text-slate-400 mb-2 font-mono">One-click clipboard copy:</p>
+              <button
+                onClick={copyEmail}
+                className="flex items-center gap-2 font-mono text-xs px-4 py-2 rounded-lg transition-all duration-300"
+                style={{
+                  border: '1px solid rgba(124,58,237,0.4)',
+                  color: '#A78BFA',
+                  background: 'rgba(124,58,237,0.1)',
+                }}
+              >
+                {copied ? (
+                  <>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Email Copied to Clipboard!
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    chanon.sungchoom@gmail.com
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Bottom bar */}
@@ -178,7 +304,7 @@ export const Footer: React.FC = () => {
 
           {/* Nav links */}
           <div className="flex items-center gap-4">
-            {['hero', 'methodology', 'projects', 'expertise'].map((id) => (
+            {['hero', 'methodology', 'experience', 'projects', 'expertise'].map((id) => (
               <button
                 key={id}
                 onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
@@ -196,4 +322,3 @@ export const Footer: React.FC = () => {
     </footer>
   )
 }
-
