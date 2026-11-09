@@ -133,7 +133,32 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all duration-200"
+              style={{
+                background: 'rgba(124, 58, 237, 0.1)',
+                border: '1px solid rgba(124, 58, 237, 0.35)',
+                color: '#A78BFA',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(124, 58, 237, 0.2)'
+                e.currentTarget.style.borderColor = '#A78BFA'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(124, 58, 237, 0.1)'
+                e.currentTarget.style.borderColor = 'rgba(124, 58, 237, 0.35)'
+              }}
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              CV
+            </a>
+
             <button
               onClick={() => handleNav('contact')}
               className="btn-violet text-white text-sm hidden md:flex"
@@ -200,7 +225,23 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
                 {item.label}
               </button>
             ))}
-            <div className="pt-3 mt-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+            <div className="pt-3 mt-2 flex flex-col gap-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-xs font-mono font-semibold"
+                style={{
+                  background: 'rgba(124, 58, 237, 0.1)',
+                  border: '1px solid rgba(124, 58, 237, 0.4)',
+                  color: '#A78BFA',
+                }}
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download CV (PDF)
+              </a>
               <button
                 onClick={() => handleNav('contact')}
                 className="btn-violet text-white text-sm w-full justify-center"

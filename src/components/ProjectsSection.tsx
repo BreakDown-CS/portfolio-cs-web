@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useInView } from '../hooks/useInView'
 import { ArchitectureDiagram } from './ArchitectureDiagram'
+import { ApiPlayground } from './ApiPlayground'
 
 const projects = [
   {
@@ -186,6 +187,7 @@ export const ProjectsSection: React.FC = () => {
         {/* Interactive Architecture Blueprint */}
         <div className={inView ? 'animate-in delay-500' : 'opacity-0'}>
           <ArchitectureDiagram />
+          <ApiPlayground />
         </div>
 
         {/* GitHub profile link */}

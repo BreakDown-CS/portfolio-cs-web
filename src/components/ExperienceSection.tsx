@@ -84,26 +84,39 @@ export const ExperienceSection: React.FC = () => {
                             color: '#4ADE80',
                           }}
                         >
-                          ● Current
+                          ● ACTIVE · Passed Probation
+                        </span>
+                        <span
+                          className="text-[11px] font-mono px-2 py-0.5 rounded"
+                          style={{
+                            background: 'rgba(6,182,212,0.1)',
+                            border: '1px solid rgba(6,182,212,0.25)',
+                            color: '#22D3EE',
+                          }}
+                        >
+                          Programmer Dept
                         </span>
                       </div>
                     </div>
                   </div>
 
                   <h3 className="text-2xl font-bold text-white mt-3 mb-1">
-                    Programmer · Backend Developer
+                    Junior Programmer
                   </h3>
                   <p className="text-lg font-semibold mb-1" style={{ color: '#22D3EE' }}>
                     Nippon SySits Co., Ltd.
                   </p>
-                  <p className="font-mono text-sm mb-6" style={{ color: '#94A3B8' }}>
-                    Feb 2025 – Present
+                  <p className="font-mono text-xs mb-6 flex items-center gap-2" style={{ color: '#94A3B8' }}>
+                    <span>📅 Started: 17 Feb 2025 – Present</span>
+                    <span>•</span>
+                    <span style={{ color: '#4ADE80' }}>Confirmed Permanent Staff</span>
                   </p>
 
                   <p className="text-slate-400 text-sm leading-relaxed max-w-lg" style={{ color: '#94A3B8' }}>
-                    Designing and delivering high-performance enterprise backend systems, working
-                    across multiple database engines and building production RESTful APIs at scale
-                    using Go Fiber and GORM with Clean Architecture principles.
+                    Designing and engineering high-performance enterprise backend systems. Specialized in
+                    architecting 60+ RESTful API endpoints using Go Fiber and GORM, executing multi-database
+                    integrations (Oracle DB, PostgreSQL, MySQL), and orchestrating complex enterprise workflows
+                    with Clean Architecture principles.
                   </p>
                 </div>
 

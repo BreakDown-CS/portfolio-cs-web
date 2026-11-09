@@ -176,6 +176,22 @@ export const HeroSection: React.FC = () => {
           </div>
         </div>
 
+        {/* Available for Hire Status */}
+        <div className="flex items-center justify-center gap-2 mb-4 animate-in">
+          <div
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono"
+            style={{
+              background: 'rgba(34, 197, 94, 0.08)',
+              border: '1px solid rgba(34, 197, 94, 0.35)',
+              color: '#4ADE80',
+              boxShadow: '0 0 16px rgba(34, 197, 94, 0.12)',
+            }}
+          >
+            <span className="w-2 h-2 rounded-full animate-pulse-glow" style={{ background: '#22C55E' }} />
+            <span>OPEN TO WORK · JUNIOR PROGRAMMER / BACKEND ARCHITECT</span>
+          </div>
+        </div>
+
         {/* Identity label */}
         <div className="flex items-center justify-center gap-2 mb-6 animate-in delay-100">
           <div className="h-px w-12 bg-gradient-to-r from-transparent to-violet-DEFAULT opacity-60" style={{ background: 'linear-gradient(to right, transparent, #7C3AED)' }} />
@@ -220,10 +236,10 @@ export const HeroSection: React.FC = () => {
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center animate-in delay-500">
+        <div className="flex flex-col sm:flex-row gap-3.5 items-center justify-center animate-in delay-500">
           <button
             onClick={() => handleScroll('projects')}
-            className="btn-violet text-white min-w-[180px] justify-center"
+            className="btn-violet text-white min-w-[170px] justify-center"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -231,9 +247,35 @@ export const HeroSection: React.FC = () => {
             </svg>
             Explore Architecture
           </button>
+
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 min-w-[170px] justify-center"
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(167, 139, 250, 0.4)',
+              color: '#F1F5F9',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#A78BFA'
+              e.currentTarget.style.background = 'rgba(124, 58, 237, 0.15)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(167, 139, 250, 0.4)'
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'
+            }}
+          >
+            <svg className="w-4 h-4" style={{ color: '#A78BFA' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Download CV
+          </a>
+
           <button
             onClick={() => handleScroll('contact')}
-            className="btn-outline min-w-[180px] justify-center"
+            className="btn-outline min-w-[170px] justify-center"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -243,8 +285,24 @@ export const HeroSection: React.FC = () => {
           </button>
         </div>
 
+        {/* Key Impact Metrics Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mt-12 animate-in delay-600">
+          {[
+            { value: '60+', label: 'Enterprise APIs', sub: 'Go Fiber & GORM' },
+            { value: '3+', label: 'Database Engines', sub: 'Oracle · Postgres · MySQL' },
+            { value: '100%', label: 'Clean Architecture', sub: 'Domain Driven Design' },
+            { value: '3x-5x', label: 'Velocity Multiplier', sub: 'AI Agent Workflows' },
+          ].map((m) => (
+            <div key={m.label} className="p-3.5 rounded-xl text-center glass-card">
+              <p className="font-mono font-bold text-xl md:text-2xl gradient-text mb-0.5">{m.value}</p>
+              <p className="text-xs font-semibold text-white">{m.label}</p>
+              <p className="text-[10px] font-mono text-slate-400 mt-0.5">{m.sub}</p>
+            </div>
+          ))}
+        </div>
+
         {/* Tagline */}
-        <p className="mt-10 font-mono text-xs tracking-widest uppercase animate-in delay-600"
+        <p className="mt-8 font-mono text-xs tracking-widest uppercase animate-in delay-700"
           style={{ color: 'rgba(148,163,184,0.5)' }}>
           "Architecting Enterprise Systems through AI-Powered Engineering & Clean Architecture."
         </p>

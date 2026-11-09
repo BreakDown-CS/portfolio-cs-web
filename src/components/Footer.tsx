@@ -16,8 +16,8 @@ const contactLinks = [
   },
   {
     label: 'Phone',
-    value: '(+66) 62-559-6469',
-    href: 'tel:+66625596469',
+    value: '(+66) 95-497-7428',
+    href: 'tel:+66954977428',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
@@ -292,8 +292,8 @@ export const Footer: React.FC = () => {
               BD
             </div>
             <div>
-              <p className="font-semibold text-sm text-white">Chanon Sungchoom</p>
-              <p className="font-mono text-xs" style={{ color: '#94A3B8' }}>BreakDown-CS · Backend Developer & AI Architect</p>
+              <p className="font-semibold text-sm text-white">Chanon (Arm) Sungchoom</p>
+              <p className="font-mono text-xs" style={{ color: '#94A3B8' }}>BreakDown-CS · Junior Programmer & AI Architect</p>
             </div>
           </div>
 
